@@ -27,7 +27,13 @@ jobs:
           tenant-id: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
           # Azure subscriptionId
           subscription-id: b02b567a-e4cb-4c73-975e-4664c82c8fc3
+      
+      - name: Check az CLI login inside workflow
+        run: az account show
 
+      - name: Check az access token
+        run: az account get-access-token
+        
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
