@@ -1,6 +1,10 @@
 name: "TodoApp Infrastructure Pipeline"
 on : workflow_dispatch
 
+permissions:
+  id-token: write  # ✅ REQUIRED for OIDC login
+  contents: read    # (Optional) for accessing repo content
+
 jobs:
   terraform_implementation:
     runs-on: self-hosted
