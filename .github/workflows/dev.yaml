@@ -1,0 +1,41 @@
+name: "TodoApp Infrastructure Pipeline"
+on : workflow_dispatch
+
+jobs:
+  terraform_implementation:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        
+      - name: Install Terraform
+        uses: little-core-labs/install-terraform@v2.0.0
+        with:
+          version: '4.22.0'
+  
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          # ClientId of the Azure Service principal created.
+          client-id: f41edc84-c145-4748-9b0e-303a80ff7e3e
+          # TenantId of the Azure Service principal created.
+          tenant-id: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
+          # Azure subscriptionId
+          subscription-id: b02b567a-e4cb-4c73-975e-4664c82c8fc3
+  
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false
+        working-directory: /environments/dev
+  
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: /environments/dev
+  
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        working-directory: /environments/dev
+
+    
