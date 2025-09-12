@@ -8,11 +8,11 @@ permissions:
 jobs:
   terraform_implementation:
     runs-on: self-hosted
-    # env:
-    #   ARM_CLIENT_ID: f41edc84-c145-4748-9b0e-303a80ff7e3e
-    #   ARM_TENANT_ID: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
-    #   ARM_SUBSCRIPTION_ID: b02b567a-e4cb-4c73-975e-4664c82c8fc3
-    #   ARM_USE_OIDC: true
+    env:
+      ARM_CLIENT_ID: f41edc84-c145-4748-9b0e-303a80ff7e3e
+      ARM_TENANT_ID: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
+      ARM_SUBSCRIPTION_ID: b02b567a-e4cb-4c73-975e-4664c82c8fc3
+      ARM_USE_OIDC: true
       
     steps:
       - name: Checkout
@@ -28,11 +28,11 @@ jobs:
           # Azure subscriptionId
           subscription-id: b02b567a-e4cb-4c73-975e-4664c82c8fc3
       
-      - name: Check az CLI login inside workflow
-        run: az account show
+      # - name: Check az CLI login inside workflow
+      #   run: az account show
 
-      - name: Check az access token
-        run: az account get-access-token
+      # - name: Check az access token
+      #   run: az account get-access-token
         
       - name: Terraform fmt
         id: fmt
