@@ -1,6 +1,13 @@
 name: "TodoApp Infrastructure Pipeline"
-on : workflow_dispatch
+on : 
+  pull_request:
+    branches: 
+      - main
 
+  push:
+    branches: 
+      - main
+    
 permissions:
   id-token: write  # ✅ REQUIRED for OIDC login
   contents: read    # (Optional) for accessing repo content
@@ -27,12 +34,6 @@ jobs:
           tenant-id: 87fec6fb-a2ea-4f38-bee7-2555182f058e
           # Azure subscriptionId
           subscription-id: 51984565-3b14-41c7-900f-cf01ff601798
-      
-      # - name: Check az CLI login inside workflow
-      #   run: az account show
-
-      # - name: Check az access token
-      #   run: az account get-access-token
         
       - name: Terraform fmt
         id: fmt
@@ -54,5 +55,43 @@ jobs:
         run: terraform plan -no-color -input=false
         continue-on-error: true
         working-directory: environments/dev
+
+  terraform_apply:
+    runs-on: self-hosted
+    env:
+      ARM_CLIENT_ID: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
+      ARM_TENANT_ID: 87fec6fb-a2ea-4f38-bee7-2555182f058e
+      ARM_SUBSCRIPTION_ID: 51984565-3b14-41c7-900f-cf01ff601798
+      ARM_USE_OIDC: true
+    needs: terraform_implementation
+    environment: dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+      
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          # ClientId of the Azure Service principal created.
+          client-id: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
+          # TenantId of the Azure Service principal created.
+          tenant-id: 87fec6fb-a2ea-4f38-bee7-2555182f058e
+          # Azure subscriptionId
+          subscription-id: 51984565-3b14-41c7-900f-cf01ff601798
+      
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false
+        working-directory: environments/dev
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: environments/dev
+        
+
+        
+      
 
     
