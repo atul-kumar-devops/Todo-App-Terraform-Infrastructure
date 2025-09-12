@@ -75,7 +75,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: envrionments/dev
+        working-directory: environments/dev
 
       - name: Terraform Apply
         id: apply
