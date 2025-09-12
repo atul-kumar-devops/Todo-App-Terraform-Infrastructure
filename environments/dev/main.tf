@@ -60,3 +60,12 @@ module "aks" {
   node_count          = 1
   tags                = local.common_tags
 }
+
+module "pip" {
+  source              = "../../modules/azurerm_public_ip"
+  pip_name            = "dev-pip-todoapp"
+  resource_group_name = "dev-rg-01"
+  location            = "centralus"
+  sku                 = "Basic"
+  tags                = local.common_tags
+}
