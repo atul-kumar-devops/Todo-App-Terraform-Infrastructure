@@ -9,9 +9,9 @@ jobs:
   terraform_implementation:
     runs-on: self-hosted
     env:
-      ARM_CLIENT_ID: f41edc84-c145-4748-9b0e-303a80ff7e3e
-      ARM_TENANT_ID: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
-      ARM_SUBSCRIPTION_ID: b02b567a-e4cb-4c73-975e-4664c82c8fc3
+      ARM_CLIENT_ID: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
+      ARM_TENANT_ID: 87fec6fb-a2ea-4f38-bee7-2555182f058e
+      ARM_SUBSCRIPTION_ID: 51984565-3b14-41c7-900f-cf01ff601798
       ARM_USE_OIDC: true
       
     steps:
@@ -22,11 +22,11 @@ jobs:
         uses: Azure/login@v2.3.0
         with:
           # ClientId of the Azure Service principal created.
-          client-id: f41edc84-c145-4748-9b0e-303a80ff7e3e
+          client-id: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
           # TenantId of the Azure Service principal created.
-          tenant-id: 8408c443-ccb2-4bb6-bc52-58f6eac94bc2
+          tenant-id: 87fec6fb-a2ea-4f38-bee7-2555182f058e
           # Azure subscriptionId
-          subscription-id: b02b567a-e4cb-4c73-975e-4664c82c8fc3
+          subscription-id: 51984565-3b14-41c7-900f-cf01ff601798
       
       # - name: Check az CLI login inside workflow
       #   run: az account show
