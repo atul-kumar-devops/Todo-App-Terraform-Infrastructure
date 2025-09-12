@@ -8,7 +8,6 @@ on :
     branches: 
       - main
     
-
 permissions:
   id-token: write  # ✅ REQUIRED for OIDC login
   contents: read    # (Optional) for accessing repo content
