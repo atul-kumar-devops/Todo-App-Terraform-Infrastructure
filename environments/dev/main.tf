@@ -27,8 +27,8 @@ module "sql_server" {
   sql_server_name     = "todoapp-sql-server01"
   resource_group_name = "dev-rg-01"
   location            = "centralus"
-  admin_username      = "adminuser"
-  admin_password      = ""
+  admin_username      = "devdbprivilgeuser"
+  admin_password      = "Adminuser@123"
   tags                = local.common_tags
 }
 
@@ -63,6 +63,7 @@ module "aks" {
 
 module "pip" {
   source              = "../../modules/azurerm_public_ip"
+  depends_on          = [module.rg]
   pip_name            = "dev-pip-todoapp"
   resource_group_name = "dev-rg-01"
   location            = "centralus"

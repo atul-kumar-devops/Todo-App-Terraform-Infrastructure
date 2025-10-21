@@ -10,7 +10,7 @@ terraform {
     resource_group_name  = "State-Management"
     storage_account_name = "statemanagement434"
     container_name       = "statefile"
-    key                  = "dev.terraform.tfstate"
+    key                  = "prod.terraform.tfstate"
   }
 }
 
