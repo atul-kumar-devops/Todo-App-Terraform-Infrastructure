@@ -16,9 +16,9 @@ jobs:
   terraform_implementation:
     runs-on: self-hosted
     env:
-      ARM_CLIENT_ID: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
-      ARM_TENANT_ID: 87fec6fb-a2ea-4f38-bee7-2555182f058e
-      ARM_SUBSCRIPTION_ID: 51984565-3b14-41c7-900f-cf01ff601798
+      ARM_CLIENT_ID: 0aa12f58-eeb0-42e2-a057-c6ccab716994
+      ARM_TENANT_ID: 98a591d8-2219-486b-b202-d02936d6bda0
+      ARM_SUBSCRIPTION_ID: cba3453a-ff1f-4f51-b6f6-5a1149843776
       ARM_USE_OIDC: true
       
     steps:
@@ -29,11 +29,11 @@ jobs:
         uses: Azure/login@v2.3.0
         with:
           # ClientId of the Azure Service principal created.
-          client-id: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
+          client-id: 0aa12f58-eeb0-42e2-a057-c6ccab716994
           # TenantId of the Azure Service principal created.
-          tenant-id: 87fec6fb-a2ea-4f38-bee7-2555182f058e
+          tenant-id: 98a591d8-2219-486b-b202-d02936d6bda0
           # Azure subscriptionId
-          subscription-id: 51984565-3b14-41c7-900f-cf01ff601798
+          subscription-id: cba3453a-ff1f-4f51-b6f6-5a1149843776
         
       - name: Terraform fmt
         id: fmt
@@ -59,9 +59,9 @@ jobs:
   terraform_apply:
     runs-on: self-hosted
     env:
-      ARM_CLIENT_ID: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
-      ARM_TENANT_ID: 87fec6fb-a2ea-4f38-bee7-2555182f058e
-      ARM_SUBSCRIPTION_ID: 51984565-3b14-41c7-900f-cf01ff601798
+      ARM_CLIENT_ID: 0aa12f58-eeb0-42e2-a057-c6ccab716994
+      ARM_TENANT_ID: 98a591d8-2219-486b-b202-d02936d6bda0
+      ARM_SUBSCRIPTION_ID: cba3453a-ff1f-4f51-b6f6-5a1149843776
       ARM_USE_OIDC: true
     needs: terraform_implementation
     environment: dev
@@ -73,11 +73,11 @@ jobs:
         uses: Azure/login@v2.3.0
         with:
           # ClientId of the Azure Service principal created.
-          client-id: 9c3f09c9-6d2d-4d04-b7ff-122643237bac
+          client-id: 0aa12f58-eeb0-42e2-a057-c6ccab716994
           # TenantId of the Azure Service principal created.
-          tenant-id: 87fec6fb-a2ea-4f38-bee7-2555182f058e
+          tenant-id: 98a591d8-2219-486b-b202-d02936d6bda0
           # Azure subscriptionId
-          subscription-id: 51984565-3b14-41c7-900f-cf01ff601798
+          subscription-id: cba3453a-ff1f-4f51-b6f6-5a1149843776
       
       - name: Terraform Init
         id: init
