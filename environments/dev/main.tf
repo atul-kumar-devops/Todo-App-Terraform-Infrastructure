@@ -15,7 +15,7 @@ module "rg" {
 module "stg" {
   source               = "../../modules/azurerm_storage_account"
   depends_on           = [module.rg]
-  storage_account_name = "devstgtodoapp001"
+  storage_account_name = "devstgtodoapp002"
   resource_group_name  = "dev-rg-01"
   location             = "centralus"
   tags                 = local.common_tags
