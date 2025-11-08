@@ -67,6 +67,6 @@ module "pip" {
   pip_name            = "dev-pip-todoapp"
   resource_group_name = "dev-rg-01"
   location            = "centralus"
-  sku                 = "Basic"
+  sku                 = "Standard"
   tags                = local.common_tags
 }

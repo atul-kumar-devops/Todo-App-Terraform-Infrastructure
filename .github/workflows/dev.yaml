@@ -1,55 +1,55 @@
 name: "TodoApp Infrastructure Pipeline"
-on : 
+on:
   pull_request:
-    branches: 
+    branches:
       - main
 
   push:
-    branches: 
+    branches:
       - main
-    
+
 permissions:
-  id-token: write  # ✅ REQUIRED for OIDC login
-  contents: read    # (Optional) for accessing repo content
+  id-token: write # ✅ REQUIRED for OIDC login
+  contents: read # (Optional) for accessing repo content
 
 jobs:
   terraform_implementation:
     runs-on: self-hosted
     env:
-      ARM_CLIENT_ID: 0aa12f58-eeb0-42e2-a057-c6ccab716994
-      ARM_TENANT_ID: 98a591d8-2219-486b-b202-d02936d6bda0
-      ARM_SUBSCRIPTION_ID: cba3453a-ff1f-4f51-b6f6-5a1149843776
+      ARM_CLIENT_ID: 6e692c89-a9f4-4cbd-93ef-b24a5f650772
+      ARM_TENANT_ID: f6f15ce5-ae1c-4d23-8541-6e4b335529f6
+      ARM_SUBSCRIPTION_ID: 1d3588c8-af2c-442c-bdc3-7fc3b65594b9
       ARM_USE_OIDC: true
-      
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
-  
+
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
           # ClientId of the Azure Service principal created.
-          client-id: 0aa12f58-eeb0-42e2-a057-c6ccab716994
+          client-id: 6e692c89-a9f4-4cbd-93ef-b24a5f650772
           # TenantId of the Azure Service principal created.
-          tenant-id: 98a591d8-2219-486b-b202-d02936d6bda0
+          tenant-id: f6f15ce5-ae1c-4d23-8541-6e4b335529f6
           # Azure subscriptionId
-          subscription-id: cba3453a-ff1f-4f51-b6f6-5a1149843776
-        
+          subscription-id: 1d3588c8-af2c-442c-bdc3-7fc3b65594b9
+
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
-        working-directory: environments/dev        
-        
+        working-directory: environments/dev
+
       - name: Terraform Init
         id: init
         run: terraform init -input=false
         working-directory: environments/dev
-  
+
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
         working-directory: environments/dev
-  
+
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
@@ -59,26 +59,26 @@ jobs:
   terraform_apply:
     runs-on: self-hosted
     env:
-      ARM_CLIENT_ID: 0aa12f58-eeb0-42e2-a057-c6ccab716994
-      ARM_TENANT_ID: 98a591d8-2219-486b-b202-d02936d6bda0
-      ARM_SUBSCRIPTION_ID: cba3453a-ff1f-4f51-b6f6-5a1149843776
+      ARM_CLIENT_ID: 6e692c89-a9f4-4cbd-93ef-b24a5f650772
+      ARM_TENANT_ID: f6f15ce5-ae1c-4d23-8541-6e4b335529f6
+      ARM_SUBSCRIPTION_ID: 1d3588c8-af2c-442c-bdc3-7fc3b65594b9
       ARM_USE_OIDC: true
     needs: terraform_implementation
     environment: dev
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
-      
+
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
           # ClientId of the Azure Service principal created.
-          client-id: 0aa12f58-eeb0-42e2-a057-c6ccab716994
+          client-id: 6e692c89-a9f4-4cbd-93ef-b24a5f650772
           # TenantId of the Azure Service principal created.
-          tenant-id: 98a591d8-2219-486b-b202-d02936d6bda0
+          tenant-id: f6f15ce5-ae1c-4d23-8541-6e4b335529f6
           # Azure subscriptionId
-          subscription-id: cba3453a-ff1f-4f51-b6f6-5a1149843776
-      
+          subscription-id: 1d3588c8-af2c-442c-bdc3-7fc3b65594b9
+
       - name: Terraform Init
         id: init
         run: terraform init -input=false
@@ -88,10 +88,4 @@ jobs:
         id: apply
         run: terraform apply --auto-approve
         # continue-on-error: true
-        working-directory: environments/dev 
-        
-
-        
-      
-
-    
+        working-directory: environments/dev
