@@ -4,6 +4,6 @@ variable "location" {}
 variable "dns_prefix" {}
 variable "node_count" {}
 variable "vm_size" {
-    default = "standard_a2_v2"
+    default = "standard_d2s_v3"
 }
 variable "tags" {}
