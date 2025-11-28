@@ -12,14 +12,14 @@ module "rg" {
   tags                = local.common_tags
 }
 
-module "stg" {
-  source               = "../../modules/azurerm_storage_account"
-  depends_on           = [module.rg]
-  storage_account_name = "devstgtodoapp002"
-  resource_group_name  = "dev-rg-01"
-  location             = "centralus"
-  tags                 = local.common_tags
-}
+# module "stg" {
+#   source               = "../../modules/azurerm_storage_account"
+#   depends_on           = [module.rg]
+#   storage_account_name = "devstgtodoapp002"
+#   resource_group_name  = "dev-rg-01"
+#   location             = "centralus"
+#   tags                 = local.common_tags
+# }
 
 module "sql_server" {
   source              = "../../modules/azurerm_sql_server"
@@ -61,12 +61,12 @@ module "aks" {
   tags                = local.common_tags
 }
 
-module "pip" {
-  source              = "../../modules/azurerm_public_ip"
-  depends_on          = [module.rg]
-  pip_name            = "dev-pip-todoapp"
-  resource_group_name = "dev-rg-01"
-  location            = "centralus"
-  sku                 = "Standard"
-  tags                = local.common_tags
-}
+# module "pip" {
+#   source              = "../../modules/azurerm_public_ip"
+#   depends_on          = [module.rg]
+#   pip_name            = "dev-pip-todoapp"
+#   resource_group_name = "dev-rg-01"
+#   location            = "centralus"
+#   sku                 = "Standard"
+#   tags                = local.common_tags
+# }
